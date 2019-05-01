@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import BreadList from '../components/breadList'
+import HomeBanner from '../components/homeBanner'
 
 class Page extends Component {
   componentDidMount() {
@@ -6,27 +8,20 @@ class Page extends Component {
   }
 
   render() {
-    let { breads, isFetched, error } = this.props
-
-    let displayBreads = breads.map(bread => {
-      return (
-        <li key={bread.id}>
-          {bread.name}
-        </li>
-      )
-    })
+    let { breads, isFetched, error } = this.props;
 
     return (
       <div className="page">
+        <HomeBanner />
         {error && <div>{error}</div>}
         {isFetched ? (
           <p>Loading...</p>
         ) : (
-          <ul>{displayBreads}</ul>
+          <BreadList breads={breads} />
         )}
       </div>
     )
   }
 }
 
-export default Page
+export default Page;
