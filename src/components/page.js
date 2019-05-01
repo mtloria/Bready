@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import BreadList from '../components/breadList'
-import HomeBanner from '../components/homeBanner'
+import React, { Component } from 'react';
+import BreadList from '../components/breadList';
+import HomeBanner from '../components/homeBanner';
 
 class Page extends Component {
   componentDidMount() {
@@ -14,11 +14,11 @@ class Page extends Component {
       <div className="page">
         <HomeBanner />
         {error && <div>{error}</div>}
-        {isFetched ? (
-          <p>Loading...</p>
-        ) : (
-          <BreadList breads={breads} />
-        )}
+            {isFetched ? (
+            <p>Loading...</p>
+            ) : (
+            <BreadList breads={breads} />
+            )}
       </div>
     )
   }

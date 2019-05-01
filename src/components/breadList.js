@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import Select from 'react-select'
-import '../css/breadList.css'
+import React, { Component } from 'react';
+import Select from 'react-select';
+import '../css/breadList.css';
+import { Link } from 'react-router-dom';
 
 class BreadList extends Component {
     state = {
@@ -26,6 +27,12 @@ class BreadList extends Component {
                     <div className="select-bread">
                         <Select value={selectedOption} onChange={this.handleChange} options={breadOptions} />
                     </div>
+                    {selectedOption && 
+                        //ToDo: <RecipeOverview> time estimate? days? ingredients?
+                        <div>
+                            <Link to="/bake">Bake {selectedOption.label}?</Link>  
+                        </div>
+                    }
                 </div>
             )
         }

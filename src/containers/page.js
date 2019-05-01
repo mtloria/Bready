@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import * as pageActions from '../redux/actions/page'
-import Page from '../components/page'
+import { connect } from 'react-redux';
+import * as pageActions from '../redux/actions/page';
+import Page from '../components/page';
 
 function mapStateToProps(state) {
   const { breads, isFetched, error } = state.page
