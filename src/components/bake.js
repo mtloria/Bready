@@ -24,11 +24,13 @@ class Bake extends Component{
         let last2DigitsStringArray = time.toString().split("").slice(-2);
         let last2DigitsString = "";
         let last2Digits;
-        let bumpOneHour = false;
         last2DigitsStringArray.forEach((digit) => {
             last2DigitsString += digit;
         });
 
+        if(last2DigitsString > 85){
+            return Math.ceil(time);
+        }
         if(last2DigitsString <= 10){
             last2Digits = 0;
         }
@@ -38,17 +40,9 @@ class Bake extends Component{
         else if(last2DigitsString <= 60){
             last2Digits = 50;
         }
-        else if(last2DigitsString <= 85){
+        else{
             last2Digits = 75;
         }
-        else{
-            bumpOneHour = true;
-        }
-
-        if(bumpOneHour){
-            return Math.ceil(time);
-        }
-
         return +(time.toString().split(".")[0] + "." + last2Digits);
     }
 
@@ -70,14 +64,14 @@ class Bake extends Component{
                             <p>Recipe Overview</p>
                             <p>Ingredients:</p>
                             <ul>
-                                <li>Flour: {recipe.flour} grams</li>
+                                <li>Flour: {recipe.flour} grams of {recipe.flourTypes}</li>
                                 <li>Salt: {recipe.salt} grams</li>
                                 <li>Water: {recipe.water} grams at {recipe.waterTemp} degrees</li>
                                 {recipe.yeast &&
                                     <li>Yeast: {recipe.yeast} grams (or {recipe.yeastTsp} teaspoons)</li>
                                 }
                                 {recipe.starter &&
-                                    <li>Starter: {recipe.starter} grams</li>
+                                    <li>Starter: {recipe.starter} grams of {recipe.starterType}</li>
                                 }
                             </ul>
                             <p>Time Overview:</p>
