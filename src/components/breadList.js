@@ -30,7 +30,13 @@ class BreadList extends Component {
                     {selectedOption && 
                         //ToDo: <RecipeOverview> time estimate? days? ingredients?
                         <div>
-                            <Link to="/bake">Bake {selectedOption.label}?</Link>  
+                            <Link to={{
+                                pathname: '/bake',
+                                state: {
+                                    breadId: selectedOption.value,
+                                    breadName: selectedOption.label,
+                                }
+                            }}>Bake {selectedOption.label}?</Link>  
                         </div>
                     }
                 </div>
