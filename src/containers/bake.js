@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  getRecipes: bakeActions.getRecipes
+  getRecipeByBreadId: bakeActions.getRecipeByBreadId
 }
 
 export default connect(

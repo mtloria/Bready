@@ -14,7 +14,7 @@ import {
     }
   }
 
-  export function getRecipes(breadId) {
+  export function getRecipeByBreadId(breadId) {
     return dispatch => {
       dispatch({
         type: GET_RECIPES_REQUEST

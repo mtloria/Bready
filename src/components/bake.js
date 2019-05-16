@@ -9,7 +9,7 @@ class Bake extends Component{
     componentDidMount() {
         const { breadId, breadName } = this.props.location.state;
         this.setState({breadId, breadName});
-        this.props.getRecipes(breadId);
+        this.props.getRecipeByBreadId(breadId);
     }
 
     estimateTotalTime = (recipe) => {
