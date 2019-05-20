@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Bake extends Component{
     state = {
@@ -82,6 +83,15 @@ class Bake extends Component{
                                 <li>Bake Time: {recipe.bakeTime} minutes</li>
                                 <li>Total Estimated Time to Bready Goodness: {timeEstimate} hours</li>
                             </ul>
+                            <div>
+                            <Link to={{
+                                pathname: '/step',
+                                state: {
+                                    recipe: recipe,
+                                    stepNumber: 1,
+                                }
+                            }}>Let's Get Started!</Link>  
+                            </div>
                         </div>
                     )}
             </div>
