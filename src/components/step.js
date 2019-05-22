@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { O_NOATIME } from 'constants';
 
 class Step extends Component{
     state = {
@@ -14,7 +15,7 @@ class Step extends Component{
     }
 
     componentWillReceiveProps(nextProps){
-        if(nextProps.location.state.stepNumber > this.state.stepNumber)
+        if(nextProps.location.state.stepNumber != this.state.stepNumber)
         {
             const { recipe, stepNumber } = nextProps.location.state;
             this.setState({recipe, stepNumber});
@@ -22,10 +23,31 @@ class Step extends Component{
         }
       }
 
+      splitUpTimeIntoHoursAndMinutes = (time) => {
+        let hours = (time / 60);
+        let rhours = Math.floor(hours);
+        let minutes = (hours - rhours) * 60;
+        let rminutes = Math.round(minutes);
+        let hourText = rhours ? 
+            rhours > 1 ?
+                rhours + " hours " : 
+                rhours + " hour "
+            : "";
+        let minuteText = rminutes && rhours ? 
+            "and " + rminutes + " minutes" :
+            rminutes ? 
+                rminutes + " minutes" :
+                "";
+        return rhours && rminutes ? 
+            hourText + minuteText :
+            "None. Continue when ready!";
+      }
+
     render(){
         let { step, isFetched, error } = this.props;
         const { recipe, stepNumber } = this.state;
-
+        let timeToNextStep = this.splitUpTimeIntoHoursAndMinutes(step.timeToNextStep);
+        
         return(
             <div>
                 {error && <div>{error}</div>}
@@ -41,9 +63,21 @@ class Step extends Component{
                                 {step.additionalText &&
                                     <p>{step.additionalText}</p>
                                 }
-                                <p>Time to next step: {step.timeToNextStep} minutes</p>
+                                {step.stepNumber != recipe.numberOfSteps &&
+                                    <p>Time to next step: {timeToNextStep}</p>
+                                }
                             </div>
-
+                            {stepNumber > 1 &&
+                            <div>
+                                <Link to={{
+                                    pathname: '/step',
+                                    state: {
+                                        recipe: recipe,
+                                        stepNumber: stepNumber - 1,
+                                    }
+                                }}>Go Back One Step</Link>
+                            </div>
+                            }
                             {stepNumber + 1 <= recipe.numberOfSteps &&
                             <div>
                                 <Link to={{
